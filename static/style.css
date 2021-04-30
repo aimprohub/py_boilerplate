@@ -1,0 +1,51 @@
+body, html{
+  height: 100%;
+  background-color: #fbfbfb;
+}
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+main{
+  margin-top: 70px;
+}
+.btn{
+  border-radius: 0;
+}
+
+.bg-nav{
+  background-color: #445c75!important;
+  color: #fff;
+}
+a.navbar-brand,
+a.nav-link{
+  color: #fff;
+  cursor: pointer;
+}
+.active-nav{
+  border-bottom:2px solid #68dde2;
+}
+.w-50{
+  width: 50px!important;
+}
+.main{
+  background:#fbfbfb
+}
+table thead{
+  color: #fff;
+  background: #445c75;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
