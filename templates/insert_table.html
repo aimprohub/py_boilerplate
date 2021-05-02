@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% set active_page = "calibration" %} {% block content
+%}
+
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <p class="sidenavtxt">
+        <a href="http://localhost:5000/enqshow">Enq List</a>
+      </p>
+      <p><a href="http://localhost:5000/enq_insert">New Enq</a></p>
+      <p><a href="#">Search</a></p>
+    </div>
+    <div class="col-sm-9 text-left">
+      <h3>Sample table 'enquiry' display.</h3>
+      <hr />
+      <h3>Visit List</h3>
+    </div>
+    <form id="myForm" action="/insert_table" method="post">
+      <table>
+        <tr>
+          <td>Visiters Name</td>
+          <td><input type="text" name="name" /></td>
+        </tr>
+        <tr>
+          <td>Article List</td>
+          <td><input type="text" name="alist" /></td>
+        </tr>
+        <tr>
+          <td><input type="submit" id="insert" name="insert" /></td>
+        </tr>
+        <tbody>
+          {% endblock %}
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>

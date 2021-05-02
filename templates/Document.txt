@@ -1,0 +1,39 @@
+POST sbumit form:
+localhost:5000/pagetable : All about POST method. 
+
+Import: function '/pagetable' form server.py and pagetable.html. Action is to be added.  
+For action refer /page2 and page2.html
+(why POST?) : 
+     URL should not show the details. 
+     Also large data submit shoudl be possible. 
+Page opens DB table (table 'enquiry'). Using html page pagetable.html. It has also input text and input 
+radio button in table. Reads all Form elements and send to /page2  . This page display values in the form 
+on  using page2.html. 
+warning: POST can not be used from javsScript function. It should be GET only. If used from table direclty then it 
+shoud be via javaScript function. Hence advised to use radio button and take action vis button. OR can be used
+from form directly without using JavaScript Function. 
+
+GET submit Form:
+Import: function '/display_table' and disp_table.html . Action is to be added as required.
+For action  refer /display_table1 and /display_table1.html
+url: localhost:5000/disp_table
+uses disp_table.html 
+on submit uses method "GET". URL formed at the href:// level.
+On submit in disp_table.html action = /page1 to display form elements.
+
+Test: click on input text will take value to next page. Click on  table cell 'Edit' will from url and submit via JS function.
+Please note make sure when testing to use appropiate variable respectively. (both subs buttons do not work simultenisly)
+
+Form: insert in to table
+url: /insert using page insert_table.html. Action is /insert_table
+The values will be inserted into DB , table 'visit'. All column will be displayed as per DB table.
+
+
+Login pages:
+url : localhost:5000/login 
+this will use 'login.login.html' and function '/login'. Need  table by name 'accounts'. THis will contain user, password, email , phone
+number and active. Active will be checked when login. There is no error if not acgive but will not allow to login
+When success will start session with user_id and username . In all pages subsequenly check for active session' and 
+if not valid show msg 'login first'. This is using POST method. 
+In /profile change password is written. This will use /profile and page  'changepaswd.html' (currently not cpoied in this dir)
+. On  success this will update database table. 
