@@ -1,0 +1,103 @@
+{% extends "base_doner.html" %} {% set active_page = "calibration" %} {% block content
+%}
+
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      
+    </div>
+    <div class="col-sm-9 text-left">
+      
+      <h3>Doner Declaration</h3>
+    
+    <form id="myForm" action="/disp_table1" method="post">
+      <table>
+        <tr>
+          <th style="width: 35%">Item</th>
+          <th style="width: 50%">Details</th>
+        <tr>
+          <td>Name</td>
+          <td><input type="text" name="party_name" class="form-control" /></td>
+        </tr>
+        <tr>
+          <td>Doner Contact No</td>
+          <td><input type="text" name="contact_no" class="form-control"/></td>
+        </tr>
+        <tr>
+          <td>Address</td>
+          <td><input type="text" name="address" class="form-control"/></td>
+        </tr>
+        
+        <tr>
+          <td>Last Date of Donation</td>
+          <td><input type="date" name="t_moving_date" class="form-control" value="{{today1}}"/></td>
+        </tr>
+        
+        <tr>
+          <td>Past History of Illness</td>
+          <td><input type="text" name="city_load" class="form-control"/></td>
+        </tr>
+        <tr>
+          <td>Currently Undergoing Medication any</td>
+          <td><input type="text" name="city_uload" class="form-control"/></td>
+        </tr>
+        <tr>
+          <td>HBV \ HIV \ HBD</td>
+          <td><input type="text" name="house_area" class="form-control" value="0"/></td>
+        </tr>
+        
+          <td>History of Illegal Drugs if</td>
+          <td><input type="text" name="p_visit_date" class="form-control"/></td>
+        </tr>
+        <tr>
+          <td>Blood Group</td>
+          <td><input type="text" name="floor_no_load" class="form-control" value="1"/></td>
+        </tr>
+        <tr>
+          <td>Age of Baby (Month)</td>
+          <td><input type="text" name="floor_no_unload" class="form-control" value="1"/></td>
+        </tr>
+        <tr>
+          <td>Vaccination Taken</td>
+          <td>
+           <input type="radio" name="lift_Ld" checked> Taken
+            
+           <input type="radio" name="lift_Ld">  Not Taken
+          </td>
+        </tr>
+        <tr>
+         <td>Lift available at Unloading site</td>
+         <td>
+           <input type="radio" name="Lift_Unld" checked> Available
+           <input type="radio" name="Lift_Unld">   Not Available
+         </td>
+        </tr>
+          
+        <tr>
+          <td>Insuranced  </td>
+          <td>
+            <input type="radio" name="insurance" checked> Yes
+          
+            <input type="radio" name="insurance">  No
+          </td>
+        </tr>
+        <tr>
+            <td>Visit Required </td>
+            <td>
+            <input type="radio" name="visit" checked> Required
+          
+            <input type="radio" name="visit">  No Thanks
+            </td>
+        </tr>
+        <tr>
+          <td><input type="submit" id="insert" name="insert" value="Reset" /></td>
+          <td><input type="submit" id="insert" name="insert" value="Save Enquiry" /></td>
+        </tr>
+        <tbody>
+        </div>
+          {% endblock %}
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>

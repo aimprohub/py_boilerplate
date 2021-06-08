@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% set active_page = "calibration" %}
+{% block content %}
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <p class="sidenavtxt"><a href="http://localhost:5000/enqshow">Enq List</a></p>
+      <p><a href="http://localhost:5000/enq_insert">New Enq</a></p>
+      <p><a href="#">Search</a></p>
+    </div>
+    <div class="col-sm-9 text-left"> 
+        <h3>Sample table 'enquiry' display.</h3>      
+        <hr>
+        <h3>Enquiry List</h3>
+    </div>
+    <form id="myForm" action="/disp_table1" method = "GET"> 
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Enquiry ID</th>
+                    <th>TryPost</th>
+                    <!-- <th>Select</th> -->
+                    <th>Address</th>
+                    <th>Phone No</th>
+                    <th>Cont</th>
+                    <th>eMail</th>
+                    <th>Unload address</th>
+                    <th>City_ld</th>
+                    <th>City_unld</th>
+                    <th>Schedule_Vist</th>
+                    <th>Error Log</th>
+                </tr>
+            </thead>    
+            <tbody>
+                {% for row in data %}    
+                <tr>
+                    <td><a href=/disp_table1?recid={{row[0]}}> {{row[0]}}  </a></td>
+                    <!--<td><a href="{{ url_for('page1', my_var=row) }} ">Submit</a></td> -->
+                    <!-- <td><button type="submit">Edit</button> </td> -->
+                    <!--<td><button  class="btn btn-primary" type="submit" id={{row[0]}}>Select:{{row[0]}} <i class="fas fa-arrow-circle-right"></i></button></td> -->
+                    <td onclick="myAction_row('{{row[0]}}')"> Edit</td><td>asdf asdf</td> 
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                    <td>{{row[4]}}</td>
+                    <td>{{row[5]}}</td>
+                    <td>{{row[6]}}</td>
+                    <td>{{row[7]}}</td>
+                    <td>{{row[8]}}</td>
+                    
+                    <td><a href=/schedule?recid={{row[0]}}> Schedule Visit  </a></td>          
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+
+    <input type ="hidden" id = "recid" name = "recid" value='6'>
+    <input type = "text" id ="myBt1" name ="myBt1" >
+    <input type ="submit" id ="myForm" name ="Sub"> 
+    <p id="demo"></p>
+</div>
+</div>
+
+<script>
+    function myFunction() {
+        document.getElementById("myForm").submit();
+    }
+
+    function myFunction1(x) {
+        alert("Row index is: " + x);
+    }   
+        
+    function myAction_row(x) {
+        document.getElementById("recid").value = x;
+        alert (x);
+        //document.getElementById("myForm").action = "/disp_table1";
+        document.getElementById("myForm").submit();
+    }
+</script>
+
+{% endblock %}

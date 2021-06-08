@@ -1,0 +1,92 @@
+{% extends "base_doner.html" %} {% set active_page = "calibration" %} {% block content
+    %}
+    
+    <div class="container-fluid text-center">
+      <div class="row content">
+        <div class="col-sm-2 sidenav">
+          
+        </div>
+        <div class="col-sm-9 text-left">
+          
+          <h3>Consent from Doner </h3>
+        
+        <form id="myForm" action="/disp_table" method="post">
+
+I agree to get my physical check up free of cost from approved center directed by the 
+Milk Bank Center. I agree for the decision of expression of milk by the Doctore / Staff and that decision will be binding on me. 
+  	
+
+          {% for row in data %} 
+          <table>
+            <tr>
+              <th style="width: 35%">Item</th>
+              <th style="width: 50%">Details</th>
+            <tr>
+              <td>Name</td>
+              <td>{{party_name}} </td>
+            </tr>
+            
+            <tr>
+              <td>Username</td>
+              <td>{{row[1]}} </td>
+            </tr>
+            <tr>
+              <td>User Role</td>
+              <td>{{row[3]}} </td>
+            </tr>
+          
+            <tr>
+              <td>First Name</td>
+              <td>{{row[4]}} </td>
+            </tr>
+            <tr>
+              <td>Last Name</td>
+              <td>{{row[5]}} </td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>{{row[6]}} </td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>{{row[7]}} </td>
+            </tr>
+            <tr>
+              <td>Acctount Active</td>
+              <td>{{row[8]}} </td>
+            </tr>
+            <tr>
+              <td>Doctor Name</td>
+              <td>{{row[9]}} </td>
+            </tr>
+            
+
+            <tr>
+	          <td><input type="submit" id="insert" name="insert" value="Back" /></td>
+                  <td></td>
+                            
+            </tr>
+</table>
+                  <tbody>
+                   
+                  </div>
+                  
+  
+                  </tbody>
+</table>
+ {% endfor %} 
+        <tr>
+<p> Required </p>
+            <td>
+            <input type="radio" name="visit" checked> Agree
+          
+            <input type="radio" name="visit">  Not Agree
+            </td>
+</tr>           
+<p><p><input type="submit" id="insert" name="insert" value="Register" ></p> </p>            
+{% endblock %}              
+              </form>
+            </div>
+
+          </div>
+       

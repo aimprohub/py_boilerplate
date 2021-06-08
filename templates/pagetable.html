@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% set active_page = "calibration" %}
+{% block content %}
+
+Show table enquiry
+<form name="myForm" action = "/page2" onsubmit="return validateForm()" method = "post">
+    Name: <input type = "text" id= "name" name = "name" />
+    Age: <input type = "text" name = "age" />
+    <table>
+        <thead>
+            <tr>
+                <th>Enquiry ID</th>
+                <th>TryPost</th>
+                <!-- <th>Select</th> -->
+                <th>Address</th>
+                <th>Phone No</th>
+                <th>Cont</th>
+                <th>eMail</th>
+                <th>Unload address</th>
+                <th>City_ld</th>
+                <th>City_unld</th>
+                <th>Schedule_Vist</th>
+                <th>Error Log</th>
+            </tr>
+        </thead>    
+        
+        <tbody>
+            {% for row in data %}    
+            <tr>
+                <td><input type ="radio" name="nameradio" id="radioname" value={{row[0]}} > </td>
+                <!--Use following submit option from table rows direclty, instead of submit buttons.  -->
+                <!--<td><input  type="submit" name="topen" value = {{row[0]}}></input> </td> --> 
+                
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>{{row[3]}}</td>
+                <td>{{row[4]}}</td>
+                <td>{{row[5]}}</td>
+                <td>{{row[6]}}</td>
+                <td>{{row[7]}}</td>
+                <td>{{row[8]}}</td>
+                
+                <td><a href=/schedule?recid={{row[0]}}> Schedule Visit  </a></td>          
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+ 
+<p id="demo"></p>
+</div>
+<input type = "submit" name="open" value="update" /> 
+<input type = "submit" name="open" value="edit" />  
+</div>
+
+<script>
+function validateForm() {
+  alert ("In ValaidateForm()");
+  //var y = document.forms["myForm"]["name"].value;
+  var x = documment.getElementById("name").value
+  alert ("by "+x)
+  if (y == "") {
+    alert("Name must be filled out");
+    return false;
+  }
+}
+
+
+function myFunction1(x) {
+    alert("Row index is: " + x);
+}   
+    
+function myAction_row() {
+    //document.getElementById("myButton").value = x;
+    alert ('yesx');
+    // document.getElementById("myForm").action = "/index";
+    document.getElementById("myForm").submit();
+    
+}
+</script>
+
+
+
+
+   
+</form>
+
+{% endblock %}

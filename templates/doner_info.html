@@ -1,0 +1,142 @@
+{% extends "base_doner.html" %} {% set active_page = "calibration" %} {% block content
+%}
+
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      
+    </div>
+    <div class="col-sm-9 text-left">
+      
+      <h3>Doner Declaration of {{username}}</h3>
+    
+    <form id="myForm1"  onsubmit="return getAllValues()" action="/doner_reg"  method="post">
+      <table>
+        <tr>
+          <th style="width: 35%">Item</th>
+          <th style="width: 50%">Details</th>
+        <tr>
+          <td>Name</td>
+          <td><input type="text" name="name" class="form-control" value={{username}} readonly></td>
+        </tr>
+        <tr>
+          <td>Doner Contact No</td>
+          <td><input type="text" name="contact_no" class="form-control" value={{contact_no}} readonly></td>
+        </tr>
+        <tr>
+          <td>Address</td>
+          <td><input type="text" name="address" class="form-control" value={{address}} readonly></td>
+        </tr>
+        
+        <tr>
+          <td>Last Date of Donation</td>
+          <td><input type="date" name="last_donation_date" class="form-control" value="{{today1}}"/></td>
+        </tr>
+        
+        <tr>
+          <td>Past History of Illness</td>
+          <td><input type="text" name="past_illness" class="form-control"/></td>
+        </tr>
+        <tr>
+          <td>Currently Undergoing Medication any</td>
+          <td><input type="text" name="medication" class="form-control"/></td>
+        </tr>
+        <tr>
+          <td>HBV / HIV / HBD</td>
+          <td><input type="text" name="HBV_HIV" class="form-control" value="0"/></td>
+        </tr>
+        
+          <td>History of Illegal Drugs/Tobaco/Alcohol/Nicoline etc</td>
+          <td><input type="text" name="tobaco" class="form-control"/></td>
+        </tr>
+        <tr>
+          <td>Blood Group</td>
+          <td><input type="text" name="blood_group" class="form-control" value="1"/></td>
+        </tr>
+        <tr>
+          <td>DOB of First Child </td>
+          <td><input type="date" name="first_child_DOB" class="form-control" value="1"/></td>
+        </tr>
+        <tr>
+          <td>Acute Illness if any</td>
+          <td><input type="text" name="acute_illness" class="form-control" value="No"/></td>
+        </tr>
+        <tr>
+          <td>Active Herps Infection</td>
+          <td>
+           <input type="radio" name="active_herps_infection" value="yes" checked> Yes
+           <input type="radio" name="active_herps_infection" value ="no">  No
+          </td>
+        </tr>
+        <tr>
+          <td>Insuranced  </td>
+          <td>
+            <input type="radio" name="insurance" value="yes" checked> Yes
+            <input type="radio" name="insurance" value="no">  No
+          </td>
+        </tr>
+        <tr>
+            <td>Visit Required </td>
+            <td>
+            <input type="radio" id = "visit" name="visit" value="yes" checked> Required 
+            <input type="radio" id="visit1" name="visit" value="no">  No Thanks
+            </td>
+        </tr>
+        <tr>
+          <td>Doner consent and agree.</td>
+          <td>
+            <input type="radio" name="consent" value="yes" > Agree
+            <input type="radio" name="consent" value="no" checked>  Not Agree
+          </td>
+         </tr>
+        <tr>
+          <td><input type="submit" id="insert" name="insert" value="Reset" /></td>
+          <td><input type="submit" id="insert" name="insert" value=" Continue " /></td>
+          <input type ="hidden" name ="donereg" id="donereg">
+        </tr>
+        <tbody>
+        </div>
+    <script>
+    function getAllValues() {
+    var x = document.getElementById("myForm1");
+    var txt = "";
+    var i;
+    var txtname="";
+    var jsontxt ="{";
+    //alert(x.length);
+    for (i = 0; i < x.length-1; i++) {
+      var y = x.elements[i].name;
+      var z = x.elements[i].type;
+      var c = x.elements[i].checked;
+      //alert(c);
+      if (z == "radio" && c == false){continue;}                        //20, Success. All ckeckded and radio are in list.
+      //if (y == "visit" || y == "insurance"){continue;}                // OK output. Removed visit and insurance element
+      //if(document.getElementById('visit').checked) {continue;}        //no output. All removed? Visit element removed (which  are checked)    
+      txt = x.elements[i].value ;
+      txtname = document.getElementById("myForm1").elements[i].name;
+      //if (txtname == "visit") {continue;}                             // OK removed visit only
+      
+      //if(document.getElementById(txtname).checked) {continue;}        //20 in list, no value. All elements removed. 
+      jsontxt = jsontxt + "\"" + txtname + "\"" + " : \"" + txt +"\",";
+    }
+    var jsonelem = jsontxt.replace(/,$/,'}');
+    alert (jsonelem) ;
+    document.getElementById("donereg").value = jsonelem;
+  }
+  function myFunction() {
+  var x = document.getElementById("myForm1");
+  var txt = "";
+  var i;
+  for (i = 0; i < x.length; i++) {
+    txt = txt + x.elements[i].value + ", ";
+  }
+  alert(txt);
+}
+</script>
+          {% endblock %}
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+

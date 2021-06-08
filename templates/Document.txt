@@ -15,7 +15,7 @@ from form directly without using JavaScript Function.
 
 GET submit Form:
 Import: function '/display_table' and disp_table.html . Action is to be added as required.
-For action  refer /display_table1 and /display_table1.html
+For action  refer is /display_table1 and /display_table1.html
 url: localhost:5000/disp_table
 uses disp_table.html 
 on submit uses method "GET". URL formed at the href:// level.

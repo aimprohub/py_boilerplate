@@ -1,0 +1,54 @@
+{% extends "base_doner.html" %} {% set active_page = "calibration" %} {% block content
+    %}
+    
+    <div class="container-fluid text-center">
+      <div class="row content">
+        <div class="col-sm-2 sidenav">
+          
+        </div>
+        <div class="col-sm-9 text-left">
+          Please Schedule Donation:
+          <h3>Schedule: {{session_username}}</h3>
+        
+        <form id="myForm" action="/profile_edit" method="post">
+           
+          <table>
+            <tr>
+              <th style="width: 45%">Item</th>
+              <th style="width: 50%">Details</th>
+            <tr>
+              <td>UserName</td>
+              <td>{{session_username}} </td>
+            </tr>
+            <tr>
+                <td>Schedule Date</td>
+                <td><input type="date" name="Schedule Date" class="form-control" value=""></td>
+            </tr>
+            <td>Collection Required</td>
+            <td>
+              <input type="radio" name="to_collect" value="yes" checked> Yes
+              <input type="radio" name="to_collect" value ="no">  No
+             </td>
+            <tr>
+              <td>Collection Address / ward</td>
+              <td><input type="text" name="collection_address" class="form-control" value=""></td>
+            </tr>
+            <tr>
+              <td>Doctor Name</td>
+              <td><input type="text" name="Doctor_name" class="form-control" value=""></td>
+            </tr>
+            <tr>
+                    <td><input type="submit" id="insert" name="schedule" value=" Cancell " ></td>   
+                    <td><input type="submit" id="insert" name="schedule" value=" Schedule " ></td>        
+            </tr>
+                  <tbody>   
+                  </div>
+                  
+                  {% endblock %} 
+                  </tbody>
+                </table>
+            
+              </form>
+            </div>
+          </div>
+         

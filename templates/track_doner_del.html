@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_doctor.html" %}
 {% set active_page = "calibration" %}
 {% block content %}
 <div class="container-fluid text-center">    
@@ -13,8 +13,8 @@
         <hr>
         <h3>Enquiry List</h3>
     </div>
-    <form id="myForm" action="/page1" method = "POST"> 
-        <table>
+    <form id="myForm" action="/disp_table1" method = "GET"> 
+        <table class="table">
             <thead>
                 <tr>
                     <th>Enquiry ID</th>
@@ -34,11 +34,11 @@
             <tbody>
                 {% for row in data %}    
                 <tr>
-                    <td><a href=/editrec?recid={{row[0]}}> {{row[0]}}  </a></td>
-                    <td><a href="{{ url_for('page1', my_var=row) }} ">Submit</a></td>
+                    <td><a href=/disp_table1?recid={{row[0]}}> {{row[0]}}  </a></td>
+                    <!--<td><a href="{{ url_for('page1', my_var=row) }} ">Submit</a></td> -->
                     <!-- <td><button type="submit">Edit</button> </td> -->
                     <!--<td><button  class="btn btn-primary" type="submit" id={{row[0]}}>Select:{{row[0]}} <i class="fas fa-arrow-circle-right"></i></button></td> -->
-                    <!-- <td onclick="myAction_row('{{row[0]}}')"> Edit</td><td>asdf asdfaasf</td> -->
+                    <td onclick="myAction_row('{{row[0]}}')"> Edit</td><td>asdf asdf</td> 
                     <td>{{row[1]}}</td>
                     <td>{{row[2]}}</td>
                     <td>{{row[3]}}</td>
@@ -55,7 +55,7 @@
         </table>
     </form>
 
-    <input type ="hidden" id = "myBut" name = "myBut" value='6'>
+    <input type ="hidden" id = "recid" name = "recid" value='6'>
     <input type = "text" id ="myBt1" name ="myBt1" >
     <input type ="submit" id ="myForm" name ="Sub"> 
     <p id="demo"></p>
@@ -72,9 +72,9 @@
     }   
         
     function myAction_row(x) {
-        document.getElementById("myBut").value = x;
+        document.getElementById("recid").value = x;
         alert (x);
-        // document.getElementById("myForm").action = "/index";
+        //document.getElementById("myForm").action = "/disp_table1";
         document.getElementById("myForm").submit();
     }
 </script>

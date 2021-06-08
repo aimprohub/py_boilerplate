@@ -28,8 +28,9 @@ function show_no() {
   alert(x + y + z);
 }
 function getAllValues() {
-  var x = document.getElementById("myForm3");
+  var x = document.getElementById("myForm");
   // console.log(x);
+  alert("ok")
   var txt = "";
   var i;
   for (i = 0; i < x.length; i++) {

@@ -3,10 +3,10 @@
 <div>
     <p>{{ message }}</p>
 
-    <p>In all contacts: Well come  {{session_username}} </p>
-    <p> Contact is in list:   Verfied user id. </p> 
+    <p>As a Doner: Well come {{session_name}}, Id: {{session_username}} </p>
+    <p> Contact is in list: User-id is verified. </p> 
     
-       session_id= {{session_id}}, username={{session_username}}, role = {{role}}
+       session_id= {{session_id}}, username={{session_username}}, role = {{role}}, Name={{session_name}}
        
 </div>
 {% endblock %}

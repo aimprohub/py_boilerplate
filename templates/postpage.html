@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% set active_page = "calibration" %}
+{% block content %}
+
+<h1>The input formaction attribute</h1>
+
+<p>The formaction attribute specifies the URL of a file that will process the input when the form is submitted.</p>
+
+<form action = "/page2" method = "POST">
+    Name: <input type = "text" name = "name" />
+    Age: <input type = "text" name = "age" />
+    <input type = "submit" />
+ </form>
+
+
+{% endblock %}
