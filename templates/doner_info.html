@@ -1,5 +1,4 @@
-{% extends "base_doner.html" %} {% set active_page = "calibration" %} {% block content
-%}
+{% extends "base.html" %} {% set active_page = "calibration" %} {% block content %}
 
 <div class="container-fluid text-center">
   <div class="row content">
@@ -25,7 +24,7 @@
         </tr>
         <tr>
           <td>Address</td>
-          <td><input type="text" name="address" class="form-control" value={{address}} readonly></td>
+          <td><input type="text" name="address" class="form-control" value="{{address}}" readonly></td>
         </tr>
         
         <tr>
@@ -47,11 +46,11 @@
         </tr>
         
           <td>History of Illegal Drugs/Tobaco/Alcohol/Nicoline etc</td>
-          <td><input type="text" name="tobaco" class="form-control"/></td>
+          <td><input type="text" name="tobaco1" class="form-control" value=""></td>
         </tr>
         <tr>
           <td>Blood Group</td>
-          <td><input type="text" name="blood_group" class="form-control" value="1"/></td>
+          <td><input type="text" name="blood_group" class="form-control" value="A"/></td>
         </tr>
         <tr>
           <td>DOB of First Child </td>
@@ -65,7 +64,7 @@
           <td>Active Herps Infection</td>
           <td>
            <input type="radio" name="active_herps_infection" value="yes" checked> Yes
-           <input type="radio" name="active_herps_infection" value ="no">  No
+           <input type="radio" name="active_herps_infection" value ="no"> No
           </td>
         </tr>
         <tr>

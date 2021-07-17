@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, url_for, session, jsonify
 from flask_mysqldb import MySQL
 import re
 import json
-
+#import server_doctor.py
 app = Flask(__name__)
 
 app.secret_key = 'your secret key'
@@ -25,7 +25,6 @@ mysql = MySQL(app)
 def index():
     return render_template("index.html", message="Hello Flask!")
     
-
 # All ablut login and session. Takenfrom other site.
 @app.route('/login')
 @app.route('/login', methods=['GET', 'POST'])
@@ -51,7 +50,7 @@ def login():
             session['role'] = account[3]
             session['name'] = account[4]
             msg = 'Logged in successfully ! Session on'
-            doner_login_page='doner_login.html'     #default page if profile present. 
+            doner_login_page='doner_login.html'     #default page when profile present. 
             cursor.execute( 'SELECT * FROM profile WHERE id = %s ', (account[0], ))    
             profile_present = cursor.fetchone()
             if not profile_present :
@@ -63,7 +62,7 @@ def login():
             elif session['role'] in ('doner'):
                 return render_template(doner_login_page, msg=msg, session_id=session['session_id'], session_username=session['username'], role=session['role'], session_name=session['name'])
             elif session['role'] in ('doctor') :
-                return render_template('doctor_login.html', msg=msg, session_id=session['session_id'], session_username=session['username'], role=session['role'], session_name=session['name'])
+                return render_template('doctor/doctor_login.html', msg=msg, session_id=session['session_id'], session_username=session['username'], role=session['role'], session_name=session['name'])
 
             else:
                 return render_template('index_login.html', msg=msg, session_id=session['session_id'], session_username=session['username'], role=session['role'], name=session['name'])
@@ -130,6 +129,7 @@ def register():
 def profile():
     username = session.get("username")
     userid = session.get("session_id")
+    role = session.get("role")
     username = str(username)
     #username =str('ram')
     print('USER ',username,userid)
@@ -154,17 +154,17 @@ def profile():
     #print('user ', data_profile)
     #print ('DATA 2 ')
     #data_p = {'id': 1, 'address': '32 Anjanwadi, Sadashive Peth, Pune 411013', 'password': 2}
-    return render_template('profile.html', data=data, user_d=user_details, dob=dob, contact_no=contact_no, address=address, aadhar_no=aadhar_no)
+    return render_template('profile.html', data=data, user_d=user_details, dob=dob, contact_no=contact_no, address=address, aadhar_no=aadhar_no, role=role)
 
 @app.route('/profile_edit', methods=['GET', 'POST'])
 def profile_edit():
     cursor = mysql.connection.cursor()
     userid = session.get("session_id")
     username = session.get("username")
+    role = session.get("role")
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM user where username = %s', (username,)) 
-    data = cursor.fetchall()
-    
+    data = cursor.fetchall()    
     cursor.execute('SELECT * FROM profile where id = %s', (userid,)) 
     data_profile = cursor.fetchall()
     for row in data_profile:
@@ -172,26 +172,34 @@ def profile_edit():
             contact_no = row[4]
             aadhar_no = row[6]
             address = row[3]
-    
     profile_route = request.form['profile']
     print ('In profile up-',profile_route)
     if 'Edit' in profile_route :
-        return render_template('profile_edit.html', data=data, dob=dob, contact_no=contact_no, address=address, aadhar_no=aadhar_no, username=username)
+        return render_template('profile_edit.html', data=data, dob=dob, contact_no=contact_no, address=address, aadhar_no=aadhar_no, username=username, role=role)
     if 'Save' in profile_route :
         #Insert all values in profile for username, id
-        dob = request.form['DOB']
-        contact_no = request.form['Contact No']
+        dob = request.form['dob']
+        contact_no = request.form['contact_no']
         address = request.form['address']
         emailid = request.form['email']
         aadhar_no=request.form['aadhar_cd_no']
-        cursor.execute(
-            'INSERT INTO profile (id, address, birthdate, contact_no,  emailid,  aadhar_cd_no) values  (%s, %s, %s, %s, %s, %s)',(userid, address, dob, contact_no, emailid, aadhar_no,)) 
+        cursor.execute('SELECT * FROM profile where id = %s', (userid,)) 
+        data_profile = cursor.fetchone()
+        if not data_profile :
+            cursor.execute(
+                'INSERT INTO profile (id, address, birthdate, contact_no,  emailid,  aadhar_cd_no) values  (%s, %s, %s, %s, %s, %s)',(userid, address, dob, contact_no, emailid, aadhar_no,)) 
+        else :
+            cursor.execute( 
+                'UPDATE profile set address = %s, emailid=%s, contact_no = %s, aadhar_cd_no=%s where id = %s', ( address, emailid, contact_no, aadhar_no, userid,))
         mysql.connection.commit()
-        return render_template('profile.html', data=data, dob=dob, contact_no=contact_no, address=address, aadhar_no=aadhar_no, username=username)
+        return render_template('profile.html', data=data, dob=dob, contact_no=contact_no, address=address, aadhar_no=aadhar_no, username=username, role=role)
     if 'Cancell' in profile_route :
-        return render_template('profile.html', data=data, dob=dob, contact_no=contact_no, address=address, aadhar_no=aadhar_no, username=username)
-    else :
-        return(profile_route+" neither option is correnct")        
+        return render_template('profile.html', data=data, dob=dob, contact_no=contact_no, address=address, aadhar_no=aadhar_no, username=username, role=role)
+    else :                   #Coming to profile first time. To create profile
+        #cursor.execute(
+        #    'INSERT INTO profile (id, address, birthdate, contact_no,  emailid,  aadhar_cd_no) values  (%s, %s, %s, %s, %s, %s)',(userid, address, dob, contact_no, emailid, aadhar_no,)) 
+        #mysql.connection.commit()
+        return(profile_route+" Option selected is not in list!")        
 
 @app.route('/schedule',methods=['GET', 'POST'])
 def schedule():
@@ -210,6 +218,9 @@ def schedule1():
 def doner_info():
     username = session.get("username")
     userid = session.get("session_id")
+    role = session.get("role")
+
+    #print ("Role ",role)
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor = mysql.connection.cursor()
     cursor.execute('SELECT * FROM profile where id = %s', (userid,)) 
@@ -221,43 +232,46 @@ def doner_info():
             address = row[3]
     cursor.execute(
             'SELECT * FROM doner_info WHERE id = %s ', (userid, ))
-    accounts = cursor.fetchone()
+    accounts = cursor.fetchone()              #If accounts exists then show database record. If not show blank form to doner.
     if accounts:
         print ("Account  ", accounts[16])     #This field has json data of all page (page_info) elements
         account = json.loads(accounts[16])
         #print ("account=",account)
-        return render_template("doner_info_post.html", accounts = account, username=username)
-    else:                       #New doner. Take doner_info
-        return render_template("doner_info.html", username=username, userid=userid, address=address, contact_no=contact_no, dob=dob)
+        return render_template("doner_info_post.html", accounts = account, username=username, role=role)
+    else:                       #New doner. Take doner_info and save
+        return render_template("doner_info.html", role=role, username=username, userid=userid, address=address, contact_no=contact_no, dob=dob)
 
 @app.route('/doner_reg',methods=['GET', 'POST'])
 def doner_reg():
     cursor = mysql.connection.cursor()
     username = session.get("username")
     userid = session.get("session_id")
+    #role = request.form['role']
+    role = session.get("role")
     parameter = request.form['donereg']
     print ('ParaMeter', parameter,username,userid)
 
     cursor.execute( 'SELECT * FROM doner_info WHERE id = %s ', (userid, ))
     accounts = cursor.fetchone()
-    if accounts:
-        #print ("Account  ", accounts[16])     #This field has json data of all page (page_info) elements
-        #account = json.loads(accounts[16])
+    if accounts:                               #If accounts exists then update record. If no then create one and save.
+        #print ("Account  ", accounts[16])     #This field has json data of complete page (page_info) elements
+        account = json.loads(accounts[16])
         cursor.execute( 'UPDATE doner_info set parameters = %s where id = %s', ( parameter, userid,))
         mysql.connection.commit()
-        return render_template("doner_info_post.html", accounts = accounts, username=username)
+        return render_template("doner_info_post.html", accounts = account, username=username, role=role)
     else :
         cursor.execute( 'INSERT INTO doner_info (id, parameters ) values (%s, %s)', (userid, parameter,))
         mysql.connection.commit()
-    return render_template("doner_info1.html")
+    return render_template("doner_info1.html", role=role)
 
-@app.route('/track_doner', methods=['GET', 'POST'])
+@app.route('/track_doner1', methods=['GET', 'POST'])
 def track_doner():
     cursor = mysql.connection.cursor()
+    role = session.get("role")
     cursor.execute("SELECT * FROM user where role='doner'")
     data = cursor.fetchall()
     adata='1'
-    return render_template('track_doner.html', data=data, adata=adata)
+    return render_template('doctor/track_doner.html', data=data, adata=adata, role=role)
 
 @app.route('/disp_table', methods=['GET', 'POST'])
 def disp_table():

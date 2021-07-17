@@ -1,4 +1,4 @@
-{% extends "base_doner.html" %} {% set active_page = "calibration" %} {% block content
+{% extends "base.html" %} {% set active_page = "calibration" %} {% block content
     %}
     
     <div class="container-fluid text-center">
@@ -22,15 +22,15 @@
             </tr>
             <tr>
                 <td>Date of Birth</td>
-                <td>{{dob}} </td>
+                <td><input type="text" name="dob" class="form-control" value="{{dob}}"></td>
             </tr>
             <tr>
               <td>Address</td>
-              <td><input type="text" name="HBV_HIV" class="form-control" value="{{address}}"></td>
+              <td><input type="text" name="address" class="form-control" value="{{address}}"></td>
             </tr>
             <tr>
               <td>Contact No</td>
-              <td><input type="text" name="Contact No" class="form-control" value="{{contact_no}}"></td>
+              <td><input type="text" name="contact_no" class="form-control" value="{{contact_no}}"></td>
             </tr>
             <tr>
               <td>User Role</td>
@@ -38,11 +38,11 @@
             </tr>
             <tr>
               <td>Aadhar No</td>
-              <td>{{aadhar_no}} </td>
+              <td><input type="text" name="aadhar_cd_no" class="form-control" value="{{aadhar_no}}"></td>
             </tr>
             <tr>
               <td>Email</td>
-              <td><input type="text" name="Email " class="form-control" value="{{row[7]}}"></td>
+              <td><input type="text" name="email" class="form-control" value="{{row[5]}}"></td>
             </tr>
             
             <tr>
@@ -51,7 +51,7 @@
             </tr>
             <tr>
                     <td><input type="submit" id="insert" name="profile" value=" Cancell " ></td>   
-                    <td><input type="submit" id="insert" name="profile" value=" Save " ></td>        
+                    <td><input type="submit" id="insert" name="profile" value="Save" ></td>        
             </tr>
                   <tbody>   
                   </div>

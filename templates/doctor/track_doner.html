@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% set active_page = "calibration" %}
+{% block content %}
+<div class="container-fluid text-center">    
+  <div class="row content">
+    
+    <div class="row content">
+        <div class="col-sm-1 sidenav"> <!-- Right side margin-->
+          
+        </div>
+        <div class="col-sm-10 text-left">
+          
+          <h3>Doner Tracker</h3>
+
+          {% if adata == '1' %}
+          <p>Display if adata is 1. Role is  {{session.role}}</p>
+          {% endif %}
+<form name="myForm" action="/open_enq" onsubmit="return validateForm()" method="post">
+  
+<table  >
+            <thead >
+                <tr>
+                    <th  style="font-size: 14px; text-align: center;">Doner ID</th>
+                    <th class="smal">Select Record</th>
+                    <!-- <th>Select</th> -->
+                    <th class="smal">Enquiry Date</th>
+                    <th>Doner Name</th>
+                    <th>Role</th>
+                    <th>Name</th>
+                    <th>Last name</th>
+                    <th>City_load</th>
+                    <th>Doner eMail ID</th>
+                    <th>Visit_No</th>
+                   
+                    <!--<th>Schedule_Vist</th> -->
+                    
+                </tr>
+            </thead>    
+            <tbody>
+                
+                {% for row in data %}    
+                <tr>
+                    <!-- <td><a href=/disp_table1?recid={{row[0]}}> {{row[0]}}  </a></td> -->
+                    <td><a href=/open_enq?recid={{row[0]}}> {{row[0]}}  </a></td>
+                    <!--<td><a href="{{ url_for('page1', my_var=row) }} ">Submit</a></td> -->
+                    <!-- <td><button type="submit">Edit</button> </td> -->
+                    <!--<td><button  class="btn btn-primary" type="submit" id={{row[0]}}>Select:{{row[0]}} <i class="fas fa-arrow-circle-right"></i></button></td> -->
+                    <!--<td onclick="myAction_row('{{row[0]}}')"> Edit</td> -->
+                    
+                    <td><input type="radio" name="enqid_select" value={{row[0]}} >  </td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                    <td>{{row[4]}}</td>
+                    <td>{{row[5]}}</td>
+                    <td>{{row[6]}}</td>
+                    <td>{{row[7]}}</td>
+                    <td>{{row[20]}}</td>
+                   
+                    
+                    <!-- <td><a href=/schedule?recid={{row[0]}}> Schedule Visit  </a></td>-->          
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <input type="submit"  name="submit" value="Open Enquiry">
+        <!--<input type="submit"  name ="submit" value="Edit Record"> -->
+        <input type="submit"  name ="submit" value="Visit">
+        <input type="submit"  name ="submit" value="Quotation Form">
+        <!--<input type="submit"  name ="submit" value="Work Order Memo"> -->
+        
+      </div>
+    </form>
+
+
+</form>
+<script>
+function validateForm() {
+ 
+  var x = document.forms["myForm"]["enqid_select"].value;
+ 
+  if (x == "") {
+    alert("Please select Enquiry row to process.");
+    return false;
+  }
+}
+
+</script>
+{% endblock %}

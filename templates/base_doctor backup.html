@@ -11,17 +11,9 @@
   </head>
     <body>
       <!-- navbar component included -->
-      {% if role == 'doctor' %} 
-         {% include './navbar_doctor.html' %}
-      {% endif %}
-      {% if role == 'doner' %}
-         {% include './navbar_doner.html' %}
-      {% endif %}
-
-       
+      {% include './navbar_doctor.html' %}
       <main role="main" class="container-fluid p-3">
-          <h2 class="text-center">Lactation Management Center</h2><hr><br>
-        
+          <h2 class="text-center">Application Name</h2><hr><br>
           {% block content %} {% endblock %}   
       </main>
       

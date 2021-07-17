@@ -59,3 +59,23 @@ function getFormData(){
   alert(formData)
   return formData;
 }
+
+//Fun used in profile.html to validate date and other elements.
+function validate_form() {
+  alert ("in Validate")
+            if (document.profile.address.value == "") {
+                alert("Please fill in the 'Your address' box.");
+                return false;
+            }
+            if (document.profile.aadhar_cd_no.value == "") {
+                alert("Enter Aadhar Number");
+                return false;
+            }
+            if (document.profile.dob.value == "") {
+                alert("Enter Joining date");
+                return false;
+            }
+          
+            alert("sucessfully Submitted");
+        }
+ 

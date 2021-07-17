@@ -9,7 +9,7 @@
           Please create Your Profile to start:
           <h3>Create Profile: {{session_username}}</h3>
         
-        <form id="myForm" action="/profile_edit" method="post">
+        <form id="myForm" action="/profile_edit" name="profile" onsubmit="return validate_form();" method="post">
            
           <table>
             <tr>
@@ -20,8 +20,8 @@
               <td>{{session_username}} </td>
             </tr>
             <tr>
-                <td>Date of Birth</td>
-                <td><input type="date" name="DOB" class="form-control" value=""></td>
+                <td>Date of Birth </td>
+                <td><input type="date" name="dob" class="form-control" value=""></td>
             </tr>
             <tr>
               <td>Address</td>
@@ -29,7 +29,7 @@
             </tr>
             <tr>
               <td>Contact No</td>
-              <td><input type="text" name="Contact No" class="form-control" value="{{contact_no}}"></td>
+              <td><input type="text" name="contact_no" class="form-control" value="{{contact_no}}"></td>
             </tr>
             <tr>
               <td>User Role</td>
@@ -54,7 +54,28 @@
             </tr>
                   <tbody>   
                   </div>
-                  
+                  <script>
+                  function validate_form() {
+                              if (document.profile.address.value == "") {
+                                  alert("Please fill in the 'Your address' box.");
+                                  return false;
+                              }
+                              if (document.profile.aadhar_cd_no.value == "") {
+                                  alert("Enter Aadhar Number");
+                                  return false;
+                              }
+                              if (document.profile.dob.value == "") {
+                                  alert("Enter Date of Birth date");
+                                  return false;
+                              }
+                              if (document.profile.contact_no.value == "") {
+                                  alert("Enter Contact Number");
+                                  return false;
+                              }
+                            
+                              alert("Sucessfully Saved");
+                          }
+                    </script>
                   {% endblock %} 
                   </tbody>
                 </table>

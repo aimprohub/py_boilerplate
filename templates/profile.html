@@ -1,4 +1,4 @@
-{% extends "base_doner.html" %} {% set active_page = "calibration" %} {% block content
+{% extends "base.html" %} {% set active_page = "calibration" %} {% block content
     %}
     
     <div class="container-fluid text-center">
@@ -10,7 +10,7 @@
           
           <h3>Profile of </h3>
         
-        <form id="myForm" action="/profile_edit" method="post">
+        <form id="myForm"  action="/profile_edit" method="post">
           {% for row in data %} 
           <table>
             <tr>
@@ -30,7 +30,7 @@
             </tr>
             <tr>
               <td>Contact No</td>
-              <td>{{address.email}} </td>
+              <td>{{contact_no}} </td>
             </tr>
             <tr>
               <td>User Role</td>
